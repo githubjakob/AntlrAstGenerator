@@ -1,12 +1,10 @@
-// Generated from src/Java8.g4 by ANTLR 4.7
+package java8;// Generated from src/Java8.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.misc.*;
 import org.antlr.v4.runtime.tree.*;
 import java.util.List;
-import java.util.Iterator;
-import java.util.ArrayList;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class Java8Parser extends Parser {
@@ -257,7 +255,7 @@ public class Java8Parser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "Java8.g4"; }
+	public String getGrammarFileName() { return "java8/Java8.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
