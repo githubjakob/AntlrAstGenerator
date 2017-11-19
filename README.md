@@ -1,11 +1,12 @@
-#Antlr Java Ast Generator
+# Antlr Java Ast Generator
+https://github.com/githubjakob/AntlrAstGenerator
 
 This projects generates an Abstract Syntax Tree (AST) from Java sourcecode.
 
-##Goal
+## Goal
 Generate an AST from Sourcecode for various input languages using Antlr4.
 
-###Target languages
+### Target languages
 * Java
 * JavaScript
 * C++
@@ -43,7 +44,7 @@ StartRuleName: compilationUnit
 https://github.com/antlr/grammars-v4/tree/master/java8
 
 
-###Python3
+### Python3
 
 java -jar antlr.jar Python3.g4
 
@@ -56,7 +57,7 @@ startRuleName: single_input
 java -cp .:../antlr/antlr.jar org.antlr.v4.gui.TestRig Python3 single_input -gui Test.py
 
 
-###JavaScript
+### JavaScript
 
 
 https://github.com/antlr/grammars-v4/tree/master/javascript
@@ -75,17 +76,17 @@ javac *.java
 java -cp .:../../antlr/antlr.jar org.antlr.v4.gui.TestRig JavaScript program -gui Test.js
 
 
-###CPP
+### CPP
 
 java -cp .:../../antlr/antlr.jar org.antlr.v4.gui.TestRig CPP14 translationunit -gui Test.cc
 
 
-###C
+### C
 
 java -cp .:../../antlr/antlr.jar org.antlr.v4.gui.TestRig C compilationUnit -gui Test.c
 
 
-###CSharp
+### CSharp
 
 
 java -cp .:../../antlr/antlr.jar org.antlr.v4.gui.TestRig CSharp compilation_unit -gui Test.cs
