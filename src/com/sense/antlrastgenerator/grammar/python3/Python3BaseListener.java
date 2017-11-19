@@ -1,4 +1,4 @@
-package python;// Generated from Python3.g4 by ANTLR 4.7
+package com.sense.antlrastgenerator.grammar.python3;// Generated from Python3.g4 by ANTLR 4.7
 
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;

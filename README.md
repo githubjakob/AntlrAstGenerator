@@ -1,12 +1,13 @@
 # Antlr Java Ast Generator
 https://github.com/githubjakob/AntlrAstGenerator
 
-This projects generates an Abstract Syntax Tree (AST) from Java sourcecode.
+This projects generates an Abstract Syntax Tree (AST) from Java sourcecode, 
+and produces a list of the names (types) of all the by performing a depth-first search.
 
 ## Goal
 Generate an AST from Sourcecode for various input languages using Antlr4.
 
-### Target languages
+### Input languages (Grammars)
 * Java
 * JavaScript
 * C++

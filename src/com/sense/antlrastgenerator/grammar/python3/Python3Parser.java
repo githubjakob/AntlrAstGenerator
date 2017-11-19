@@ -1,4 +1,4 @@
-package python;// Generated from Python3.g4 by ANTLR 4.7
+package com.sense.antlrastgenerator.grammar.python3;// Generated from Python3.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
 import org.antlr.v4.runtime.*;
@@ -136,7 +136,7 @@ public class Python3Parser extends Parser {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "python/Python3.g4"; }
+	public String getGrammarFileName() { return "com/sense/antlrastgenerator/grammar/python3/Python3.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }

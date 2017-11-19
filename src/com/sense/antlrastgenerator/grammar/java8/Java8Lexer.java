@@ -1,9 +1,13 @@
-package java8;// Generated from src/Java8.g4 by ANTLR 4.7
+// Generated from Java8.g4 by ANTLR 4.7
+package com.sense.antlrastgenerator.grammar.java8;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class Java8Lexer extends Lexer {
@@ -140,7 +144,7 @@ public class Java8Lexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "java8/Java8.g4"; }
+	public String getGrammarFileName() { return "Java8.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
