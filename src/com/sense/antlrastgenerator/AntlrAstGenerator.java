@@ -4,6 +4,10 @@ import com.sense.antlrastgenerator.grammar.java8.Java8Lexer;
 import com.sense.antlrastgenerator.grammar.java8.Java8Parser;
 import com.sense.antlrastgenerator.grammar.python3.Python3Lexer;
 import com.sense.antlrastgenerator.grammar.python3.Python3Parser;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -32,6 +36,19 @@ import java.util.ArrayList;
 public class AntlrAstGenerator {
 
     /**
+     * A Node in an AST.
+     */
+    @AllArgsConstructor
+    public static class Node {
+        public String type;
+
+        @Override
+        public String toString() {
+            return type;
+        }
+    }
+
+    /**
      * Parses the input files to a AST, then collects the names (types) of all the nodes in a ArrayList
      * by performing of a depth-first search through the tree
      * @throws IOException
@@ -40,12 +57,12 @@ public class AntlrAstGenerator {
         ParseTree javaTree = parseJava("examples/java/Demo.java");
         ParseTree pythonTree = parsePython("examples/python/Demo.py");
 
-        final ArrayList<String> javaNodes = collectNodeNames(javaTree);
-        final ArrayList<String> pythonNodes = collectNodeNames(pythonTree);
+        final ArrayList<Node> javaNodes = collectNodes(javaTree);
+        final ArrayList<Node> pythonNodes = collectNodes(pythonTree);
     }
 
-    private static ArrayList<String> collectNodeNames(ParseTree javaTree) {
-        final ArrayList<String> nodesCollection = new ArrayList<>();
+    private static ArrayList<Node> collectNodes(ParseTree javaTree) {
+        final ArrayList<Node> nodesCollection = new ArrayList<>();
         traverseTree(javaTree, nodesCollection);
         //print out nodes
         for(int i = 0; i < nodesCollection.size(); i++) {
@@ -54,11 +71,11 @@ public class AntlrAstGenerator {
         return nodesCollection;
     }
 
-    public static void traverseTree(Tree tree, ArrayList<String> nodes) {
+    public static void traverseTree(Tree tree, ArrayList<Node> nodes) {
         String nodeName = tree.getClass().getName().toString();
 
         nodeName = nodeName.substring(nodeName.lastIndexOf("$") + 1);
-        nodes.add(nodeName);
+        nodes.add(new Node(nodeName));
 
         // traverse children
         int childCount = tree.getChildCount();
