@@ -1,10 +1,13 @@
-package com.sense.antlrastgenerator.grammar.python3;// Generated from Python3.g4 by ANTLR 4.7
+// Generated from Python3.g4 by ANTLR 4.7
+package com.sense.antlrastgenerator.grammar.python3;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.Token;
+import org.antlr.v4.runtime.TokenStream;
 import org.antlr.v4.runtime.*;
 import org.antlr.v4.runtime.atn.*;
 import org.antlr.v4.runtime.dfa.DFA;
+import org.antlr.v4.runtime.misc.*;
 
 @SuppressWarnings({"all", "warnings", "unchecked", "unused", "cast"})
 public class Python3Lexer extends Lexer {
@@ -159,7 +162,7 @@ public class Python3Lexer extends Lexer {
 	      }
 
 	      // Put the EOF back on the token stream.
-	      this.emit(commonToken(EOF, "<EOF>"));
+	      this.emit(commonToken(Python3Parser.EOF, "<EOF>"));
 	    }
 
 	    Token next = super.nextToken();
@@ -219,7 +222,7 @@ public class Python3Lexer extends Lexer {
 	}
 
 	@Override
-	public String getGrammarFileName() { return "com/sense/antlrastgenerator/grammar/python3/Python3.g4"; }
+	public String getGrammarFileName() { return "Python3.g4"; }
 
 	@Override
 	public String[] getRuleNames() { return ruleNames; }
