@@ -44,6 +44,12 @@ StartRuleName: compilationUnit
 
 https://github.com/antlr/grammars-v4/tree/master/java8
 
+Generate the Lexer and Parser with
+
+```
+antlr4 -no-visitor -no-listener -package com.sense.antlrastgenerator.grammar.java8 Java8.g4
+```
+
 
 ### Python3
 
