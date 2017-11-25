@@ -4,6 +4,7 @@ import com.sense.antlrastgenerator.node.Node;
 import com.sense.antlrastgenerator.node.NodeHelper;
 import org.antlr.v4.runtime.CharStream;
 import org.antlr.v4.runtime.CommonTokenStream;
+import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.tree.ParseTree;
 
 import java.util.ArrayList;
@@ -16,6 +17,8 @@ import java.util.stream.Collectors;
  * Created by jakob on 23.11.17.
  */
 abstract class AbstractSyntaxTree {
+
+    Lexer lexer;
 
     CharStream charStreams;
 
@@ -33,19 +36,12 @@ abstract class AbstractSyntaxTree {
     /** Each node has a id, which translates into a string type, this dict holds the matchings id -> name*/
     Map<Integer, String> dictionary;
 
-    public List<Node> getNodes() {
-        if (this.nodes == null) {
-            this.nodes = createNodesList();
-        }
-        return this.nodes;
-    }
-
     public List<Integer> getIdVector() {
-        return getNodes().stream().map(node -> node.getId()).collect(Collectors.toList());
+        return this.nodes.stream().map(node -> node.getId()).collect(Collectors.toList());
     }
 
     public List<Integer> getLineVector() {
-        return getNodes().stream().map(node -> node.getLine()).collect(Collectors.toList());
+        return this.nodes.stream().map(node -> node.getLine()).collect(Collectors.toList());
     }
 
     public Map<Integer, String> getDictionary() {
@@ -56,28 +52,27 @@ abstract class AbstractSyntaxTree {
     }
 
     private Map<Integer,String> createDictionary() {
-        final List<Node> nodes = getNodes();
         Map<Integer, String> dict = new TreeMap<>();
         for (int i = 0; i < nodes.size(); i++ ) {
             final Integer id = nodes.get(i).getId();
-            final String name = nodes.get(i).getType();
+            final String name = nodes.get(i).getNodeType();
             dict.put(id, name);
         }
         return dict;
-    }
-
-    private List<Node> createNodesList() {
-        return flattenAntlrTree().stream().map(node -> NodeHelper.newNode(node, this.commonTokenStream)).collect(Collectors.toList());
     }
 
     /**
      * Converts the ParseTree into a flat into a list of {@see Node} by performing a depth-first search through the tree
      * @return a list containing all the nodes of the tree
      */
-    private ArrayList<ParseTree> flattenAntlrTree() {
+    ArrayList<ParseTree> flattenAntlrTree() {
         final ArrayList<ParseTree> nodesCollection = new ArrayList<>();
         traverseTree(antlrTree, nodesCollection);
         return nodesCollection;
+    }
+
+    List<Node> createNodesList() {
+        return flattenAntlrTree().stream().map(node -> NodeHelper.newNode(node, this.commonTokenStream, this.lexer.getVocabulary())).collect(Collectors.toList());
     }
 
     /**

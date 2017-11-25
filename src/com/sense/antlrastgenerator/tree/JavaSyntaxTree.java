@@ -12,9 +12,7 @@ import java.io.IOException;
  */
 public class JavaSyntaxTree extends AbstractSyntaxTree {
 
-    private Java8Lexer java8Lexer;
-
-    private Java8Parser java8Parser;
+    Java8Parser parser;
 
     /** Sets up all the Antlr Objects (Lexer, TokenStream, Parser) and returns the input file as a abstract syntax tree representation*/
     public JavaSyntaxTree(final String file) {
@@ -24,11 +22,11 @@ public class JavaSyntaxTree extends AbstractSyntaxTree {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.java8Lexer =   new Java8Lexer(charStreams);
-        this.commonTokenStream = new CommonTokenStream(java8Lexer);
-        this.java8Parser = new Java8Parser(commonTokenStream);
-        this.antlrTree = java8Parser.compilationUnit();
-        this.nodes = getNodes();
-        this.dictionary = getDictionary();
+        this.lexer =   new Java8Lexer(charStreams);
+        this.commonTokenStream = new CommonTokenStream(lexer);
+        this.parser = new Java8Parser(commonTokenStream);
+        this.antlrTree = parser.compilationUnit();
+        this.nodes = createNodesList();
+        this.dictionary = createDictionary();
     }
 }

@@ -8,9 +8,8 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import java.io.IOException;
 
 public class JavaScriptSyntaxTree extends AbstractSyntaxTree {
-    private JavaScriptLexer javaScriptLexer;
 
-    private JavaScriptParser javaScriptParser;
+    JavaScriptParser parser;
 
     public JavaScriptSyntaxTree(String file) {
         this.file = file;
@@ -19,12 +18,12 @@ public class JavaScriptSyntaxTree extends AbstractSyntaxTree {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        this.javaScriptLexer = new JavaScriptLexer(charStreams);
-        this.commonTokenStream = new CommonTokenStream(javaScriptLexer);
-        this.javaScriptParser = new JavaScriptParser(commonTokenStream);
-        /* Single_Input is the StartRuleName */
-        this.antlrTree = javaScriptParser.program();
-        this.nodes = getNodes();
+        this.lexer = new JavaScriptLexer(charStreams);
+        this.commonTokenStream = new CommonTokenStream(lexer);
+        this.parser = new JavaScriptParser(commonTokenStream);
+        /* Program is the StartRuleName */
+        this.antlrTree = parser.program();
+        this.nodes = createNodesList();
         this.dictionary = getDictionary();
     }
 }

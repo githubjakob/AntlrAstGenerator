@@ -12,7 +12,7 @@ import org.antlr.v4.runtime.tree.ParseTree;
  */
 public abstract class Node {
 
-    String type;
+    String nodeType;
     Pair<Token, Token> tokens;
     int line; //line of first token
     int id;
@@ -32,7 +32,8 @@ public abstract class Node {
         } else {
             this.tokens = new Pair<>(null, null); // TODO fix this hack
             this.line = -1;
-        }}
+        }
+    }
 
     public int getId() {
         return this.id;
@@ -42,11 +43,11 @@ public abstract class Node {
         return this.line;
     }
 
-    public String getType() {
-        return this.type;
+    public String getNodeType() {
+        return this.nodeType;
     }
 
     public String toString() {
-        return type;
+        return nodeType;
     }
 }

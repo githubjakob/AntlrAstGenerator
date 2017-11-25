@@ -2,6 +2,7 @@ package com.sense.antlrastgenerator.node;
 
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.RuleContext;
+import org.antlr.v4.runtime.Vocabulary;
 import org.antlr.v4.runtime.tree.ParseTree;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
@@ -10,12 +11,12 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  */
 public abstract class NodeHelper {
 
-        public static Node newNode(ParseTree tree, CommonTokenStream tokenStream) {
+        public static Node newNode(ParseTree tree, CommonTokenStream tokenStream, Vocabulary vocabulary) {
         if (tree instanceof RuleContext) {
             return new InternalNode((RuleContext) tree, tokenStream);
 
         } else if (tree instanceof TerminalNode) {
-            return new LeafNode((TerminalNode) tree, tokenStream);
+            return new LeafNode((TerminalNode) tree, tokenStream, vocabulary);
         }
         return null;
     }
