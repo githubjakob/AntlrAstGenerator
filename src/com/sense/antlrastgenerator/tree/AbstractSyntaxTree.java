@@ -19,16 +19,19 @@ abstract class AbstractSyntaxTree {
 
     CharStream charStreams;
 
+    CommonTokenStream commonTokenStream;
+
+    /** The filename with the code that was parsed */
     String file;
 
     /** This is the "original" tree output coming from ANTLR */
     ParseTree antlrTree;
 
+    /** A flat representation of the tree with a list of all the nodes */
     List<Node> nodes;
 
+    /** Each node has a id, which translates into a string type, this dict holds the matchings id -> name*/
     Map<Integer, String> dictionary;
-
-    CommonTokenStream commonTokenStream;
 
     public List<Node> getNodes() {
         if (this.nodes == null) {

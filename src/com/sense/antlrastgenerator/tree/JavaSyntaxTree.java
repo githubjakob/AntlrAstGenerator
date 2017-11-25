@@ -28,6 +28,5 @@ public class JavaSyntaxTree extends AbstractSyntaxTree {
         commonTokenStream = new CommonTokenStream(java8Lexer);
         java8Parser = new Java8Parser(commonTokenStream);
         antlrTree = java8Parser.compilationUnit();
-        System.out.println("constructor");
     }
 }

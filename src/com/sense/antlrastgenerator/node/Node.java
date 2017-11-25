@@ -1,7 +1,6 @@
 package com.sense.antlrastgenerator.node;
 
 import com.sun.istack.internal.NotNull;
-import lombok.Getter;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Token;
 import org.antlr.v4.runtime.misc.Interval;

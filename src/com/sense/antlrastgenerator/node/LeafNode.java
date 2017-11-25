@@ -5,23 +5,13 @@ import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.tree.TerminalNode;
 
 /**
- * Created by jakob on 25.11.17.
+ * A terminal node or leaf in a syntax tree
  */
-public class LeafNode extends Node {
+class LeafNode extends Node {
 
     LeafNode(TerminalNode tree, CommonTokenStream tokenStream) {
         super(tree, tokenStream);
-        this.type = getTypeName(tree);
-        this.id = getNodeId(tree);
-    }
-
-    private int getNodeId(TerminalNode tree) {
-        final int type = tree.getSymbol().getType();
-        return type * -1;
-        //dictionary.put(id, this.type);
-    }
-
-    private String getTypeName(TerminalNode tree) {
-        return "TerminalNode_" + Python3Lexer.VOCABULARY.getSymbolicName(tree.getSymbol().getType());
+        this.type = "TerminalNode_" + Python3Lexer.VOCABULARY.getSymbolicName(tree.getSymbol().getType());
+        this.id = tree.getSymbol().getType() * -1;
     }
 }

@@ -10,22 +10,18 @@ import org.antlr.v4.runtime.RuleContext;
 /**
  * A InternalNode in an AST.
  */
-public class InternalNode extends Node {
+class InternalNode extends Node {
 
     InternalNode(RuleContext tree, CommonTokenStream tokenStream) {
         super(tree, tokenStream);
-        this.type = getTypeName(tree);
+        this.type = createTypeName(tree);
         this.id = tree.getRuleIndex();
     }
 
-    private String getTypeName(RuleContext tree) {
-        String nodeType = tree.getClass().getName().toString();
+    private String createTypeName(RuleContext tree) {
+        String nodeType = tree.getClass().getName();
         nodeType = nodeType.substring(nodeType.lastIndexOf("$") + 1);
         int contextPos = nodeType.indexOf("Context");
-        if (contextPos == -1) {
-            return nodeType;
-        } else {
-            return nodeType.substring(0, contextPos);
-        }
+        return nodeType.substring(0, contextPos);
     }
 }
