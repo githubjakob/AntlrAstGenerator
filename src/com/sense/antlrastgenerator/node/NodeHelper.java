@@ -11,13 +11,13 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  */
 public abstract class NodeHelper {
 
-        public static Node newNode(ParseTree tree, CommonTokenStream tokenStream, Vocabulary vocabulary) {
-        if (tree instanceof RuleContext) {
-            return new InternalNode((RuleContext) tree, tokenStream);
+        public static Node newNode(final ParseTree tree, final CommonTokenStream tokenStream, final Vocabulary vocabulary) {
+            if (tree instanceof RuleContext) {
+                return new InternalNode((RuleContext) tree, tokenStream);
 
-        } else if (tree instanceof TerminalNode) {
-            return new LeafNode((TerminalNode) tree, tokenStream, vocabulary);
-        }
-        return null;
+            } else if (tree instanceof TerminalNode) {
+                return new LeafNode((TerminalNode) tree, tokenStream, vocabulary);
+            }
+            return null;
     }
 }

@@ -72,7 +72,11 @@ abstract class AbstractSyntaxTree {
     }
 
     List<Node> createNodesList() {
-        return flattenAntlrTree().stream().map(node -> NodeHelper.newNode(node, this.commonTokenStream, this.lexer.getVocabulary())).collect(Collectors.toList());
+        return flattenAntlrTree()
+                .stream()
+                .map(
+                    node -> NodeHelper.newNode(node, this.commonTokenStream, this.lexer.getVocabulary()))
+                .collect(Collectors.toList());
     }
 
     /**

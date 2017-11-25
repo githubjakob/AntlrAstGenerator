@@ -1,5 +1,6 @@
 package com.sense.antlrastgenerator;
 
+import com.sense.antlrastgenerator.tree.CSyntaxTree;
 import com.sense.antlrastgenerator.tree.JavaScriptSyntaxTree;
 import com.sense.antlrastgenerator.tree.JavaSyntaxTree;
 import com.sense.antlrastgenerator.tree.PythonSyntaxTree;
@@ -29,9 +30,10 @@ public class AntlrAstGenerator {
 
     public static void main (String[] args) throws Exception {
 
-        List<PythonSyntaxTree> pythonTrees = generateFromPath("examples/python/", PythonSyntaxTree.class);
-        List<JavaSyntaxTree> javaTrees = generateFromPath("examples/java/", JavaSyntaxTree.class);
-        List<JavaScriptSyntaxTree> javaScriptSyntaxTrees = generateFromPath("examples/javascript/", JavaScriptSyntaxTree.class);
+        //List<PythonSyntaxTree> pythonTrees = generateFromPath("examples/python/", PythonSyntaxTree.class);
+        //List<JavaSyntaxTree> javaTrees = generateFromPath("examples/java/", JavaSyntaxTree.class);
+        //List<JavaScriptSyntaxTree> javaScriptSyntaxTrees = generateFromPath("examples/javascript/", JavaScriptSyntaxTree.class);
+        List<CSyntaxTree> cSyntaxTrees = generateFromPath("examples/c/", CSyntaxTree.class);
 
         System.out.println("Done");
     }
@@ -42,6 +44,7 @@ public class AntlrAstGenerator {
         final List<File> files = Arrays.asList(directory.listFiles());
 
         for (File input : files) {
+            // call constructor of returnType, e.g. JavaScriptSyntaxTree, JavaSyntaxTree
             result.add(returnType.getConstructor(String.class).newInstance(input.toString()));
         }
 
