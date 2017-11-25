@@ -1,4 +1,4 @@
-package com.sense.antlrastgenerator;
+package com.sense.antlrastgenerator.tree;
 
 import com.sense.antlrastgenerator.grammar.python3.Python3Lexer;
 import com.sense.antlrastgenerator.grammar.python3.Python3Parser;
@@ -10,7 +10,7 @@ import java.io.IOException;
 /**
  * Created by jakob on 23.11.17.
  */
-public class PythonParseTree extends AntlrParseTree {
+public class PythonSyntaxTree extends AbstractSyntaxTree {
 
     private String file;
 
@@ -18,7 +18,7 @@ public class PythonParseTree extends AntlrParseTree {
 
     private Python3Parser python3Parser;
 
-    PythonParseTree(String file) {
+    public PythonSyntaxTree(String file) {
         this.file = file;
         try {
             charStreams = CharStreams.fromFileName(this.file);
@@ -29,7 +29,6 @@ public class PythonParseTree extends AntlrParseTree {
         commonTokenStream = new CommonTokenStream(python3Lexer);
         python3Parser = new Python3Parser(commonTokenStream);
         /* Single_Input is the StartRuleName */
-        parseTree = python3Parser.single_input();
+        antlrTree = python3Parser.single_input();
     }
-
 }
