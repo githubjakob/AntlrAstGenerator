@@ -19,14 +19,16 @@ public class PythonSyntaxTree extends AbstractSyntaxTree {
     public PythonSyntaxTree(String file) {
         this.file = file;
         try {
-            charStreams = CharStreams.fromFileName(this.file);
+            this.charStreams = CharStreams.fromFileName(this.file);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        python3Lexer = new Python3Lexer(charStreams);
-        commonTokenStream = new CommonTokenStream(python3Lexer);
-        python3Parser = new Python3Parser(commonTokenStream);
+        this.python3Lexer = new Python3Lexer(charStreams);
+        this.commonTokenStream = new CommonTokenStream(python3Lexer);
+        this.python3Parser = new Python3Parser(commonTokenStream);
         /* Single_Input is the StartRuleName */
-        antlrTree = python3Parser.single_input();
+        this.antlrTree = python3Parser.single_input();
+        this.nodes = getNodes();
+        this.dictionary = getDictionary();
     }
 }

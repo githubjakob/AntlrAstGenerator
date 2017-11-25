@@ -1,5 +1,6 @@
 package com.sense.antlrastgenerator;
 
+import com.sense.antlrastgenerator.tree.JavaScriptSyntaxTree;
 import com.sense.antlrastgenerator.tree.JavaSyntaxTree;
 import com.sense.antlrastgenerator.tree.PythonSyntaxTree;
 
@@ -30,6 +31,7 @@ public class AntlrAstGenerator {
 
         List<PythonSyntaxTree> pythonTrees = generateFromPath("examples/python/", PythonSyntaxTree.class);
         List<JavaSyntaxTree> javaTrees = generateFromPath("examples/java/", JavaSyntaxTree.class);
+        List<JavaScriptSyntaxTree> javaScriptSyntaxTrees = generateFromPath("examples/javascript/", JavaScriptSyntaxTree.class);
 
         System.out.println("Done");
     }

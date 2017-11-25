@@ -20,13 +20,15 @@ public class JavaSyntaxTree extends AbstractSyntaxTree {
     public JavaSyntaxTree(final String file) {
         this.file = file;
         try {
-            charStreams = CharStreams.fromFileName(this.file);
+            this.charStreams = CharStreams.fromFileName(this.file);
         } catch (IOException e) {
             e.printStackTrace();
         }
-        java8Lexer =   new Java8Lexer(charStreams);
-        commonTokenStream = new CommonTokenStream(java8Lexer);
-        java8Parser = new Java8Parser(commonTokenStream);
-        antlrTree = java8Parser.compilationUnit();
+        this.java8Lexer =   new Java8Lexer(charStreams);
+        this.commonTokenStream = new CommonTokenStream(java8Lexer);
+        this.java8Parser = new Java8Parser(commonTokenStream);
+        this.antlrTree = java8Parser.compilationUnit();
+        this.nodes = getNodes();
+        this.dictionary = getDictionary();
     }
 }
