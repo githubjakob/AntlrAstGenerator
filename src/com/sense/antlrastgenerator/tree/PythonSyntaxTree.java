@@ -5,6 +5,7 @@ import com.sense.antlrastgenerator.grammar.python3.Python3Parser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
+import java.io.File;
 import java.io.IOException;
 
 /**
@@ -17,6 +18,10 @@ public class PythonSyntaxTree extends AbstractSyntaxTree {
     private Python3Lexer python3Lexer;
 
     private Python3Parser python3Parser;
+
+    public PythonSyntaxTree(File file) {
+        this(file.getAbsolutePath());
+    }
 
     public PythonSyntaxTree(String file) {
         this.file = file;
