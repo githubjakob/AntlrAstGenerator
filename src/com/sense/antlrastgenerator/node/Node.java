@@ -13,9 +13,12 @@ import org.antlr.v4.runtime.tree.ParseTree;
 public abstract class Node {
 
     String nodeType;
-    Pair<Token, Token> tokens;
-    int line; //line of first token
+
     int id;
+
+    Pair<Token, Token> tokens;
+
+    int lineOfFirstToken;
 
     Node(@NotNull final ParseTree tree, @NotNull final CommonTokenStream tokenStream) {
         if (tokenStream == null || tree == null) {
@@ -24,23 +27,22 @@ public abstract class Node {
         final Interval tokenInterval = tree.getSourceInterval(); //indexes of the token
         final int beginTokenIndex = tokenInterval.a;
         final int endTokenIndex = tokenInterval.b;
-        if (beginTokenIndex > 0 && endTokenIndex > 0) {
-            final Token beginToken = tokenStream.get(beginTokenIndex);
-            final Token endToken = tokenStream.get(endTokenIndex);
-            this.tokens = new Pair<>(beginToken, endToken);
-            this.line = beginToken.getLine();
-        } else {
-            this.tokens = new Pair<>(null, null); // TODO fix this hack
-            this.line = -1;
+        if (beginTokenIndex < 0 || endTokenIndex < 0) { // no token available
+            this.tokens = new Pair<>(null, null);
+            this.lineOfFirstToken = -1;
         }
+        final Token beginToken = tokenStream.get(beginTokenIndex);
+        final Token endToken = tokenStream.get(endTokenIndex);
+        this.tokens = new Pair<>(beginToken, endToken);
+        this.lineOfFirstToken = beginToken.getLine();
     }
 
     public int getId() {
         return this.id;
     }
 
-    public int getLine() {
-        return this.line;
+    public int getLineOfFirstToken() {
+        return this.lineOfFirstToken;
     }
 
     public String getNodeType() {

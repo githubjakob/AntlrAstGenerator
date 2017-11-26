@@ -31,9 +31,9 @@ public class AntlrAstGenerator {
     public static void main (String[] args) throws Exception {
 
         //List<PythonSyntaxTree> pythonTrees = generateFromPath("examples/python/", PythonSyntaxTree.class);
-        //List<JavaSyntaxTree> javaTrees = generateFromPath("examples/java/", JavaSyntaxTree.class);
+        List<JavaSyntaxTree> javaTrees = generateFromPath("examples/java/", JavaSyntaxTree.class);
         //List<JavaScriptSyntaxTree> javaScriptSyntaxTrees = generateFromPath("examples/javascript/", JavaScriptSyntaxTree.class);
-        List<CSyntaxTree> cSyntaxTrees = generateFromPath("examples/c/", CSyntaxTree.class);
+        //List<CSyntaxTree> cSyntaxTrees = generateFromPath("examples/c/", CSyntaxTree.class);
 
         System.out.println("Done");
     }

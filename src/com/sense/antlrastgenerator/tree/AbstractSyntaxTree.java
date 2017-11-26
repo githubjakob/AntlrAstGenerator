@@ -41,7 +41,7 @@ abstract class AbstractSyntaxTree {
     }
 
     public List<Integer> getLineVector() {
-        return this.nodes.stream().map(node -> node.getLine()).collect(Collectors.toList());
+        return this.nodes.stream().map(node -> node.getLineOfFirstToken()).collect(Collectors.toList());
     }
 
     public Map<Integer, String> getDictionary() {

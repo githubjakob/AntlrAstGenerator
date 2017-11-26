@@ -2,8 +2,6 @@ package com.sense.antlrastgenerator.tree;
 
 import com.sense.antlrastgenerator.grammar.c.CLexer;
 import com.sense.antlrastgenerator.grammar.c.CParser;
-import com.sense.antlrastgenerator.grammar.java8.Java8Lexer;
-import com.sense.antlrastgenerator.grammar.java8.Java8Parser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
