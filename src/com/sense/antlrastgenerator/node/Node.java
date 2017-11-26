@@ -30,11 +30,12 @@ public abstract class Node {
         if (beginTokenIndex < 0 || endTokenIndex < 0) { // no token available
             this.tokens = new Pair<>(null, null);
             this.lineOfFirstToken = -1;
+        } else {
+            final Token beginToken = tokenStream.get(beginTokenIndex);
+            final Token endToken = tokenStream.get(endTokenIndex);
+            this.tokens = new Pair<>(beginToken, endToken);
+            this.lineOfFirstToken = beginToken.getLine();
         }
-        final Token beginToken = tokenStream.get(beginTokenIndex);
-        final Token endToken = tokenStream.get(endTokenIndex);
-        this.tokens = new Pair<>(beginToken, endToken);
-        this.lineOfFirstToken = beginToken.getLine();
     }
 
     public int getId() {

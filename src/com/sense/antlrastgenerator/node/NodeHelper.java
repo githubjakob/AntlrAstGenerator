@@ -12,12 +12,18 @@ import org.antlr.v4.runtime.tree.TerminalNode;
 public abstract class NodeHelper {
 
         public static Node newNode(final ParseTree tree, final CommonTokenStream tokenStream, final Vocabulary vocabulary) {
+            Node node = null;
             if (tree instanceof RuleContext) {
-                return new InternalNode((RuleContext) tree, tokenStream);
+                node = new InternalNode((RuleContext) tree, tokenStream);
 
             } else if (tree instanceof TerminalNode) {
-                return new LeafNode((TerminalNode) tree, tokenStream, vocabulary);
+                node = new LeafNode((TerminalNode) tree, tokenStream, vocabulary);
             }
-            return null;
+
+            if (node.getNodeType() == null) {
+                //System.out.println("Skipping a node because it's token is not in the Lexer's vocabulary.");
+                return null;
+            }
+            return node;
     }
 }

@@ -5,16 +5,17 @@ import com.sense.antlrastgenerator.grammar.javascript.JavaScriptParser;
 import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 
+import java.io.File;
 import java.io.IOException;
 
 public class JavaScriptSyntaxTree extends AbstractSyntaxTree {
 
     JavaScriptParser parser;
 
-    public JavaScriptSyntaxTree(String file) {
-        this.file = file;
+    public JavaScriptSyntaxTree(File file) {
+        super(file);
         try {
-            this.charStreams = CharStreams.fromFileName(this.file);
+            this.charStreams = CharStreams.fromFileName(this.file.getAbsolutePath());
         } catch (IOException e) {
             e.printStackTrace();
         }

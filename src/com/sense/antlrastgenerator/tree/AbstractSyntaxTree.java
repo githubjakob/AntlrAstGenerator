@@ -2,21 +2,25 @@ package com.sense.antlrastgenerator.tree;
 
 import com.sense.antlrastgenerator.node.Node;
 import com.sense.antlrastgenerator.node.NodeHelper;
+import lombok.Getter;
 import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CharStreams;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.Lexer;
 import org.antlr.v4.runtime.tree.ParseTree;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import javax.json.Json;
+import javax.json.JsonArrayBuilder;
+import javax.json.JsonObject;
+import java.io.File;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
  * Created by jakob on 23.11.17.
  */
-abstract class AbstractSyntaxTree {
+public abstract class AbstractSyntaxTree {
 
     Lexer lexer;
 
@@ -24,10 +28,12 @@ abstract class AbstractSyntaxTree {
 
     CommonTokenStream commonTokenStream;
 
-    /** The filename with the code that was parsed */
-    String file;
+    /** The file with the code that was parsed */
+    @Getter
+    File file;
 
     /** This is the "original" tree output coming from ANTLR */
+    @Getter
     ParseTree antlrTree;
 
     /** A flat representation of the tree with a list of all the nodes */
@@ -35,6 +41,20 @@ abstract class AbstractSyntaxTree {
 
     /** Each node has a id, which translates into a string type, this dict holds the matchings id -> name*/
     Map<Integer, String> dictionary;
+
+    /** Number of syntax errors Antlr found during parsing */
+    @Getter
+    int syntaxErrors;
+
+    public AbstractSyntaxTree(File file) {
+        this.file = file;
+        try {
+            this.charStreams = CharStreams.fromFileName(this.file.getAbsolutePath());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        System.out.println("Processing " + this.file);
+    }
 
     public List<Integer> getIdVector() {
         return this.nodes.stream().map(node -> node.getId()).collect(Collectors.toList());
@@ -76,6 +96,7 @@ abstract class AbstractSyntaxTree {
                 .stream()
                 .map(
                     node -> NodeHelper.newNode(node, this.commonTokenStream, this.lexer.getVocabulary()))
+                .filter(Objects::nonNull)
                 .collect(Collectors.toList());
     }
 
@@ -100,5 +121,26 @@ abstract class AbstractSyntaxTree {
                 traverseTree(child, collection);
             }
         }
+    }
+
+    public String toString() {
+        return toJSON().toString();
+    }
+
+    public JsonObject toJSON() {
+        JsonArrayBuilder sequence = Json.createArrayBuilder();
+        this.getIdVector().forEach(id -> sequence.add(id));
+
+        JsonArrayBuilder lineNumbers = Json.createArrayBuilder();
+        this.getLineVector().forEach(line -> lineNumbers.add(line));
+
+        boolean compiled = this.getSyntaxErrors() == 0;
+
+        return Json.createObjectBuilder()
+                .add("name", this.file.getName())
+                .add("compiled", compiled)
+                .add("sequence", sequence)
+                .add("lineNumbers", lineNumbers)
+                .build();
     }
 }
